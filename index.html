@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christina A. | GRC &amp; Information Security Portfolio</title>
+  <meta name="description" content="GRC and Information Security portfolio. Practical ISMS design, risk-led control selection, and supply-chain assurance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #018bcd;
+      --blue-light: rgba(1,139,205,0.07);
+      --blue-border: rgba(1,139,205,0.22);
+      --pt: #0D0F12;
+      --ps: #3A3D42;
+      --pm: #6B7280;
+      --pf: #9CA3AF;
+      --pb: #E5E7EB;
+      --card: #F8F9FA;
+      --card-b: #E5E7EB;
+      --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #F3F4F6; color: var(--pt); line-height: 1.6; }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--pb);
+      padding: 0 3rem; display: flex; justify-content: space-between; align-items: center;
+      height: 56px; max-width: 860px; margin: 0 auto;
+    }
+    .nav-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--pt); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pf); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+    section { background: var(--white); border-bottom: 0.5px solid var(--pb); padding: 3.5rem 3rem; }
+    .section-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--blue); font-weight: 700; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--pb); }
+    #about { padding-top: 4rem; padding-bottom: 3.5rem; }
+    .hero-tag {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--blue); font-weight: 700; margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-tag::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--blue); }
+    h1 { font-family: 'DM Serif Display', serif; font-size: 52px; font-weight: 400; line-height: 1.05; color: var(--pt); margin-bottom: 0.75rem; }
+    h1 em { font-style: italic; color: var(--blue); }
+    .hero-sub { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 15px; color: var(--pm); margin-bottom: 1.75rem; }
+    .hero-bio { font-size: 15px; line-height: 1.85; color: var(--ps); font-weight: 300; max-width: 620px; margin-bottom: 2rem; }
+    .hero-bio p { margin-bottom: 1rem; }
+    .hero-bio p:last-child { margin-bottom: 0; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; background: var(--blue); color: #fff; border: none;
+      padding: 11px 24px; font-family: 'DM Sans', sans-serif; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px;
+      cursor: pointer; font-weight: 500; text-decoration: none; transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-outline { background: transparent; color: var(--blue); border: 1px solid var(--blue); }
+    .btn-outline:hover { background: var(--blue-light); opacity: 1; }
+    .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .scenario-box { background: var(--blue-light); border: 0.5px solid var(--blue-border); border-radius: 4px; padding: 1.4rem; }
+    .scenario-box.full { grid-column: 1 / -1; }
+    .scenario-box h3 { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--blue); font-weight: 400; margin-bottom: 0.65rem; }
+    .scenario-box p { font-size: 13px; line-height: 1.8; color: var(--ps); font-weight: 300; }
+    .scenario-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .scenario-list li { font-size: 13px; color: var(--ps); font-weight: 300; padding-left: 14px; position: relative; line-height: 1.6; }
+    .scenario-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); opacity: 0.45; }
+    .narrative-intro { font-size: 14px; line-height: 1.85; color: var(--ps); font-weight: 300; margin-bottom: 1.5rem; }
+    .narrative-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+    .narrative-step { display: flex; gap: 16px; align-items: flex-start; padding: 14px 16px; background: var(--card); border: 0.5px solid var(--card-b); border-radius: 4px; }
+    .step-num { font-size: 11px; font-weight: 700; color: var(--blue); background: var(--blue-light); border-radius: 2px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .step-content { font-size: 13px; line-height: 1.75; color: var(--ps); font-weight: 300; }
+    .step-content strong { font-weight: 500; color: var(--pt); }
+    .narrative-close { font-size: 13px; line-height: 1.8; color: var(--pm); font-style: italic; font-family: 'DM Serif Display', serif; border-left: 2px solid var(--blue-border); padding-left: 1rem; }
+    .purpose-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+    .purpose-item { padding: 14px 16px; background: var(--card); border: 0.5px solid var(--card-b); border-radius: 4px; }
+    .purpose-item strong { display: block; font-size: 10px; font-weight: 700; color: var(--blue); letter-spacing: 0.04em; margin-bottom: 4px; text-transform: uppercase; }
+    .purpose-item p { font-size: 13px; color: var(--ps); font-weight: 300; line-height: 1.65; }
+    .purpose-note { font-size: 12px; color: var(--pm); font-style: italic; }
+    .artefacts-list { display: flex; flex-direction: column; gap: 10px; }
+    .artefact-card { border: 0.5px solid var(--card-b); border-radius: 6px; overflow: hidden; }
+    .artefact-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; background: var(--card); cursor: pointer; user-select: none; gap: 1rem; transition: background 0.15s; }
+    .artefact-header:hover { background: #F0F1F3; }
+    .artefact-header-left { flex: 1; }
+    .artefact-tag { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); font-weight: 700; margin-bottom: 4px; }
+    .artefact-header h3 { font-family: 'DM Serif Display', serif; font-size: 17px; font-weight: 400; color: var(--pt); line-height: 1.3; margin-bottom: 4px; }
+    .artefact-header p { font-size: 12px; color: var(--pm); font-weight: 300; }
+    .artefact-toggle { font-size: 20px; color: var(--blue); font-weight: 300; transition: transform 0.25s; flex-shrink: 0; line-height: 1; width: 24px; text-align: center; }
+    .artefact-body { display: none; padding: 1.5rem; border-top: 0.5px solid var(--pb); background: var(--white); }
+    .artefact-body.open { display: block; }
+    .artefact-toggle.open { transform: rotate(45deg); }
+    .artefact-role { font-size: 12px; color: var(--blue); background: var(--blue-light); border: 0.5px solid var(--blue-border); border-radius: 3px; padding: 8px 12px; margin-bottom: 1.25rem; }
+    .artefact-body h4 { font-size: 13px; font-weight: 700; color: var(--pt); margin-top: 1.25rem; margin-bottom: 0.5rem; }
+    .artefact-body h4:first-of-type { margin-top: 0; }
+    .artefact-body p { font-size: 13px; color: var(--ps); line-height: 1.8; font-weight: 300; margin-bottom: 0.5rem; }
+    .artefact-body ul { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-bottom: 0.5rem; }
+    .artefact-body ul li { font-size: 13px; color: var(--ps); font-weight: 300; padding-left: 14px; position: relative; line-height: 1.65; }
+    .artefact-body ul li::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: var(--blue); opacity: 0.55; }
+    .artefact-downloads { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 0.5px solid var(--pb); }
+    .cert-group { margin-bottom: 1.75rem; }
+    .cert-group:last-child { margin-bottom: 0; }
+    .cert-group-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pf); font-weight: 500; margin-bottom: 0.75rem; }
+    .certs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cert-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: var(--card); border: 0.5px solid var(--card-b); border-radius: 4px; }
+    .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); margin-top: 5px; flex-shrink: 0; }
+    .cert-name { font-size: 12px; color: var(--ps); line-height: 1.5; font-weight: 400; margin-bottom: 4px; }
+    .cert-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .cert-pill { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; font-weight: 500; }
+    .pill-ms   { background: rgba(0,120,212,0.08); color: #0078D4; }
+    .pill-isc2 { background: rgba(0,101,163,0.08); color: #0065A3; }
+    .pill-bsi  { background: rgba(192,57,43,0.08);  color: #C0392B; }
+    .pill-apmg { background: rgba(88,86,214,0.08);  color: #5856D6; }
+    .pill-apm  { background: rgba(52,120,246,0.08); color: #3478F6; }
+    .pill-sa   { background: rgba(0,105,55,0.08);   color: #006937; }
+    .cert-date { font-size: 10px; color: var(--pf); }
+    .recs-list { display: flex; flex-direction: column; gap: 1.75rem; }
+    .rec-item { border-left: 2px solid rgba(1,139,205,0.22); padding-left: 1.5rem; }
+    .rec-text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 15px; color: var(--ps); line-height: 1.8; margin-bottom: 0.6rem; }
+    .rec-attr { font-size: 12px; color: var(--pm); }
+    .rec-attr strong { font-weight: 500; color: var(--ps); }
+    footer { background: var(--white); border-top: 0.5px solid var(--pb); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; max-width: 860px; margin: 0 auto; }
+    .footer-name { font-size: 12px; color: var(--pf); }
+    .footer-link { font-size: 12px; color: var(--blue); text-decoration: none; letter-spacing: 0.04em; }
+    .footer-link:hover { text-decoration: underline; }
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 10px; }
+      section { padding: 2.5rem 1.25rem; }
+      h1 { font-size: 36px; }
+      .scenario-grid, .purpose-grid, .certs-grid { grid-template-columns: 1fr; }
+      .scenario-box.full { grid-column: 1; }
+      footer { padding: 1.25rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#about" class="nav-name">Christina A.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#scenario">Scenario</a></li>
+    <li><a href="#artefacts">Artefacts</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#recommendations">Recommendations</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- 1. ABOUT -->
+  <section id="about">
+    <div class="hero-tag">Portfolio</div>
+    <h1>GRC <em>&amp; Information</em><br><em>Security</em></h1>
+    <p class="hero-sub">Practical ISMS design, risk-led control selection, and supply-chain assurance.</p>
+    <div class="hero-bio">
+      <p>I'm Christina, a governance and delivery professional with over a decade of experience across data centres, telecoms, and technology environments. My career has been built on structure, accountability, and making complex programmes work: exactly the disciplines that sit at the heart of GRC and information security.</p>
+      <p>The move into GRC and InfoSec is not a pivot. It is the natural next chapter of work I have been doing all along. Years of driving governance, risk reporting, and control frameworks across regulated environments gave me a foundation most people spend years trying to build. I have formalised and deepened that expertise through ISO 27001 Lead Implementer certification, ISC2 Certified in Cybersecurity, and a growing focus on ISMS design, policy development, and supply-chain assurance.</p>
+      <p>My particular interest lies in the practical application of compliance frameworks: building the artefacts, structures, and processes that actually hold up under audit. This portfolio reflects that. Real work, built from scratch, against a scenario designed to demonstrate depth, not just awareness.</p>
+      <p>If you are looking for someone who brings delivery discipline, governance experience, and genuine InfoSec capability in one package, you are in the right place.</p>
+    </div>
+    <div class="hero-actions">
+      <a href="assets/Christina_A_CV_GRC_IS.pdf" download class="btn">Download CV</a>
+      <a href="https://www.linkedin.com/in/christina-a-4967b028/" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+  </section>
+
+  <!-- 2. SCENARIO -->
+  <section id="scenario">
+    <div class="section-label">Scenario</div>
+    <div class="scenario-grid">
+      <div class="scenario-box full">
+        <h3>Tier III Hyperscale Data Centre</h3>
+        <p>A Tier III hyperscale data centre hosting SaaS providers (e-commerce, design, accounting). Some services process payments via Stripe (PCI DSS L1). Typical data handled: customer profiles, usage/telemetry, configurations, and support data, treated as critical information assets.</p>
+      </div>
+      <div class="scenario-box">
+        <h3>Responsibilities</h3>
+        <ul class="scenario-list">
+          <li>ISO/IEC 27001 governance and ISMS maintenance</li>
+          <li>Security of infrastructure and Stripe integrations (shared-responsibility clarified)</li>
+          <li>Third-party and supply-chain risk: assurance, SLAs, reviews</li>
+          <li>Assurance reporting to clients, auditors, and regulators</li>
+        </ul>
+      </div>
+      <div class="scenario-box">
+        <h3>Data in Scope</h3>
+        <ul class="scenario-list">
+          <li>Customer profiles and usage/telemetry</li>
+          <li>System configurations and support data</li>
+          <li>Payment processing data via Stripe (PCI DSS L1)</li>
+          <li>All treated as critical information assets</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. NARRATIVE -->
+  <section id="narrative">
+    <div class="section-label">Narrative</div>
+    <p class="narrative-intro">This portfolio shows how an ISMS operates across policy, risk, controls, and supplier assurance in a Tier III, SaaS-focused data centre.</p>
+    <div class="narrative-steps">
+      <div class="narrative-step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Policy</strong> sets scope, roles, objectives, and a 6-month review cadence, with change-triggered reviews. Evidence is tracked to owners and dates.</div>
+      </div>
+      <div class="narrative-step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Risk Assessment and Treatment</strong> uses a 5x5 likelihood/impact model with inherent vs residual scoring and explicit risk appetite bands. Each risk is tied to an owner, treatment, target date, and evidence link; residuals are re-scored after control implementation.</div>
+      </div>
+      <div class="narrative-step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Statement of Applicability</strong> maps a focused set of Annex A controls (Organisational / People / Physical / Technological) to the assessed risks with Applicability, Justification, Status, Control Owner, and Evidence location. A separate appendix lists all 93 controls to show breadth awareness.</div>
+      </div>
+      <div class="narrative-step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Third-Party Risk Register</strong> extends assurance to suppliers (e.g. Stripe, ISP, MSSP, monitoring SaaS, facilities, UPS), including assurance evidence, review cycles, and a sub-processor micro-checklist. Where a provider acts as an independent controller (e.g. Tier-1 ISP), sub-processor fields are N/A.</div>
+      </div>
+    </div>
+    <p class="narrative-close">Together, these artefacts provide an audit-ready view from risk identification to control selection and supply-chain assurance, with owners and evidence for every step.</p>
+  </section>
+
+  <!-- 4. PURPOSE -->
+  <section id="purpose">
+    <div class="section-label">Purpose</div>
+    <div class="purpose-grid">
+      <div class="purpose-item">
+        <strong>Risk-led prioritisation</strong>
+        <p>5x5 model, inherent to residual deltas, owners and target dates.</p>
+      </div>
+      <div class="purpose-item">
+        <strong>Traceable control selection</strong>
+        <p>Targeted SoA with Applicability, Justification, Status, and Evidence.</p>
+      </div>
+      <div class="purpose-item">
+        <strong>Supply-chain assurance</strong>
+        <p>Structured TPRR with sub-processor oversight and review cadence.</p>
+      </div>
+      <div class="purpose-item">
+        <strong>Continuous improvement</strong>
+        <p>6-month policy/ISMS reviews and post-change triggers.</p>
+      </div>
+    </div>
+    <p class="purpose-note">PCI DSS remains acknowledged via Stripe; the emphasis is the ISMS and information as the core asset.</p>
+  </section>
+
+  <!-- 5. ARTEFACTS -->
+  <section id="artefacts">
+    <div class="section-label">Artefacts</div>
+    <div class="artefacts-list">
+
+      <div class="artefact-card">
+        <div class="artefact-header" onclick="toggleArtefact(this)">
+          <div class="artefact-header-left">
+            <div class="artefact-tag">Policy</div>
+            <h3>Information Security Policy</h3>
+            <p>Scope, roles, CIA principles, 6-month review cadence. ISO 27001 aligned.</p>
+          </div>
+          <div class="artefact-toggle">+</div>
+        </div>
+        <div class="artefact-body">
+          <p class="artefact-role">Designed and built end-to-end as a solo portfolio exercise against a fictional Tier III SaaS data centre scenario, demonstrating practical ISO 27001 policy design.</p>
+          <h4>1. Purpose</h4>
+          <p>This policy defines the organisation's approach to protecting information assets within the Tier III hyperscale data centre environment supporting SaaS technology providers. It establishes principles for ensuring the confidentiality, integrity, and availability of information in alignment with ISO/IEC 27001.</p>
+          <h4>2. Scope</h4>
+          <p>This policy applies to all:</p>
+          <ul>
+            <li>Information systems, networks, and physical infrastructure operated within the data centre.</li>
+            <li>Employees, contractors, and third parties with access to these systems.</li>
+            <li>Information processed, stored, or transmitted on behalf of SaaS clients, including customer and business data.</li>
+          </ul>
+          <h4>3. Policy Statement</h4>
+          <p>The organisation is committed to protecting information as a critical asset, meeting ISO/IEC 27001 and regulatory obligations, managing third-party risks including Stripe/PCI DSS dependencies, and embedding a culture of security awareness across the organisation.</p>
+          <h4>4. Information Security Principles</h4>
+          <ul>
+            <li><strong>Confidentiality:</strong> Access restricted to authorised users only.</li>
+            <li><strong>Integrity:</strong> Information safeguarded from unauthorised modification.</li>
+            <li><strong>Availability:</strong> Systems accessible to authorised users when required.</li>
+            <li><strong>Accountability:</strong> Roles and responsibilities clearly defined.</li>
+            <li><strong>Continuous Improvement:</strong> ISMS reviewed through audits, monitoring, and risk assessments.</li>
+          </ul>
+          <h4>5. Responsibilities</h4>
+          <ul>
+            <li><strong>Executive Management:</strong> Ensure resources and leadership commitment to the ISMS.</li>
+            <li><strong>Information Security Officer:</strong> Oversee policy implementation and ISO/IEC 27001 compliance.</li>
+            <li><strong>Employees and Contractors:</strong> Follow security procedures, report incidents, protect information.</li>
+            <li><strong>Third Parties:</strong> Comply with contractual security obligations and assurance requirements.</li>
+          </ul>
+          <h4>6. Review Cycle</h4>
+          <p>This policy is reviewed every 6 months, and additionally following any significant change to the environment, client requirements, or regulatory landscape.</p>
+          <div class="artefact-downloads">
+            <a href="assets/Information_Security_Policy.pdf" download class="btn">Download PDF ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="artefact-card">
+        <div class="artefact-header" onclick="toggleArtefact(this)">
+          <div class="artefact-header-left">
+            <div class="artefact-tag">Risk</div>
+            <h3>Risk Assessment &amp; Treatment</h3>
+            <p>5x5 matrix, inherent vs residual scoring, owners, actions, target dates.</p>
+          </div>
+          <div class="artefact-toggle">+</div>
+        </div>
+        <div class="artefact-body">
+          <p class="artefact-role">Designed and built end-to-end as a solo portfolio exercise, demonstrating risk identification, scoring methodology, and treatment planning aligned to ISO 27001.</p>
+          <h4>1. Purpose</h4>
+          <p>This risk assessment identifies and evaluates information security risks relevant to a Tier III hyperscale data centre supporting SaaS providers. It considers risks from internal staff, external parties, regulators, and customers, aligned to ISO/IEC 27001.</p>
+          <h4>2. Methodology</h4>
+          <ul>
+            <li>Risks evaluated using a 5x5 matrix with Likelihood and Impact scales.</li>
+            <li>Each risk assigned a numerical score (Likelihood x Impact) and categorised as Low, Medium, High, or Critical.</li>
+            <li>Risks mapped to relevant ISO/IEC 27001 Annex A controls.</li>
+            <li>Inherent and residual scores recorded, with residuals re-scored after control implementation.</li>
+            <li>Each risk tied to an owner, treatment action, target date, and evidence link.</li>
+          </ul>
+          <div class="artefact-downloads">
+            <a href="assets/Risk_Assessment_Treatment.pdf" download class="btn">Download PDF ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="artefact-card">
+        <div class="artefact-header" onclick="toggleArtefact(this)">
+          <div class="artefact-header-left">
+            <div class="artefact-tag">Controls</div>
+            <h3>Statement of Applicability</h3>
+            <p>7 controls mapped to risks. Applicability, justification, status, owners, and evidence.</p>
+          </div>
+          <div class="artefact-toggle">+</div>
+        </div>
+        <div class="artefact-body">
+          <p class="artefact-role">Designed and built end-to-end as a solo portfolio exercise, demonstrating targeted control selection, traceability from obligations to controls, and audit-ready documentation.</p>
+          <h4>Sample Extract</h4>
+          <p>This extract lists the ISO/IEC 27001 controls relevant to the identified risks in this SaaS data centre scenario. Each entry shows applicability, justification, implementation status, control owner, evidence location, and links back to the specific risks it treats. A complete reference list of all 93 Annex A controls (ISO/IEC 27001:2022) is included separately for awareness.</p>
+          <h4>Why Include the Obligation List</h4>
+          <p>The SoA includes an obligation type and name for each control, making it clear which external and internal requirements drive control selection. This captures legal and regulatory duties, contractual and customer requirements, certification and framework commitments, and internal policies. Including the obligation list provides traceability from requirements to controls, clarifies shared responsibility boundaries, supports audit readiness, and ensures that when obligations change the affected controls are reviewed.</p>
+          <h4>Annex A Reference Rationale</h4>
+          <p>This appendix lists the ISO/IEC 27001:2022 Annex A control catalogue (93 controls) across four themes: Organisational (37), People (8), Physical (14), and Technological (34). Included to provide a complete reference baseline so reviewers can see the full control universe, validate scope decisions, and understand shared-responsibility boundaries. The listing is for awareness only and does not imply every control is applicable or implemented.</p>
+          <div class="artefact-downloads">
+            <a href="assets/SoA.pdf" download class="btn">SoA PDF ↓</a>
+            <a href="assets/Obligations_List.pdf" download class="btn btn-outline">Obligations List ↓</a>
+            <a href="assets/Annex_A.pdf" download class="btn btn-outline">Annex A ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="artefact-card">
+        <div class="artefact-header" onclick="toggleArtefact(this)">
+          <div class="artefact-header-left">
+            <div class="artefact-tag">Supply Chain</div>
+            <h3>Third-Party Risk Register</h3>
+            <p>Suppliers and sub-processor checklist. Inherent vs residual scoring, review cadence.</p>
+          </div>
+          <div class="artefact-toggle">+</div>
+        </div>
+        <div class="artefact-body">
+          <p class="artefact-role">Designed and built end-to-end as a solo portfolio exercise, demonstrating structured supplier assurance, sub-processor oversight, and defensible third-party risk management.</p>
+          <h4>Rationale</h4>
+          <p>This register exists to make supplier risk visible, owned, and testable in a SaaS data centre context. The data centre relies on external services for payments, monitoring, security operations, connectivity, facilities, and maintenance. Those dependencies introduce confidentiality, integrity, availability, and compliance risks that must be assessed, treated, and reviewed on a cadence.</p>
+          <h4>What This Covers</h4>
+          <ul>
+            <li>Criticality and services provided, including data types processed and purpose</li>
+            <li>Jurisdiction and transfer basis, including any cross-border processing</li>
+            <li>Contract and SLA terms that affect security and availability</li>
+            <li>Assurance evidence aligned to expectations (ISO 27001, SOC 2, PCI where relevant)</li>
+            <li>Sub-processor oversight, change notifications, right to object, and flow-down clauses</li>
+            <li>Inherent and residual risk scoring with owners, treatments, and target dates</li>
+            <li>Review cycles, last review date, and audit trail of actions taken</li>
+          </ul>
+          <h4>Why It Matters</h4>
+          <ul>
+            <li>Clarifies shared responsibility boundaries across controller, processor, and sub-processor</li>
+            <li>Links supplier controls and assurances to risks in the register and controls in the SoA</li>
+            <li>Provides a defensible record for audits and customer due diligence</li>
+            <li>Reduces single points of failure and avoids silent drift in supplier posture over time</li>
+          </ul>
+          <p style="font-size:12px;color:var(--pm);font-style:italic;margin-top:0.75rem;">Where a provider acts as an independent controller and not a processor (for example a Tier-1 ISP handling traffic metadata under telecom and privacy law), sub-processor fields are recorded as N/A for clarity.</p>
+          <div class="artefact-downloads">
+            <a href="assets/Risk_Assessment_Treatment.pdf" download class="btn">Download PDF ↓</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-label">Certifications</div>
+    <div class="cert-group">
+      <div class="cert-group-label">GRC &amp; Security</div>
+      <div class="certs-grid">
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">BSI Lead Implementer ISO/IEC 27001:2022</div>
+            <div class="cert-meta"><span class="cert-pill pill-bsi">BSI</span><span class="cert-date">Nov 2025</span></div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">ISC2 Certified in Cybersecurity (CC)</div>
+            <div class="cert-meta"><span class="cert-pill pill-isc2">ISC2</span><span class="cert-date">Jul 2025</span></div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Microsoft Certified: Security, Compliance and Identity Fundamentals (SC-900)</div>
+            <div class="cert-meta"><span class="cert-pill pill-ms">Microsoft</span><span class="cert-date">Jul 2025</span></div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Microsoft Certified: AI Fundamentals (AI-900)</div>
+            <div class="cert-meta"><span class="cert-pill pill-ms">Microsoft</span><span class="cert-date">Aug 2025</span></div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Microsoft Certified: Azure Fundamentals (AZ-900)</div>
+            <div class="cert-meta"><span class="cert-pill pill-ms">Microsoft</span><span class="cert-date">Apr 2025</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cert-group">
+      <div class="cert-group-label">Delivery &amp; Governance</div>
+      <div class="certs-grid">
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Certified Scrum Product Owner (CSPO)</div>
+            <div class="cert-meta"><span class="cert-pill pill-sa">Scrum Alliance</span><span class="cert-date">Dec 2024</span></div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">AgilePM Practitioner</div>
+            <div class="cert-meta"><span class="cert-pill pill-apmg">APMG</span><span class="cert-date">Oct 2018</span></div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">APM Project Management Qualification (PMQ)</div>
+            <div class="cert-meta"><span class="cert-pill pill-apm">APM</span><span class="cert-date">Mar 2017</span></div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">PRINCE2 Foundation</div>
+            <div class="cert-meta"><span class="cert-pill pill-apmg">APMG</span><span class="cert-date">Mar 2012</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. RECOMMENDATIONS -->
+  <section id="recommendations">
+    <div class="section-label">Recommendations</div>
+    <div class="recs-list">
+      <div class="rec-item">
+        <p class="rec-text">"Christina delivered even against challenging scopes and timeframes with intelligence, passion, and diligence. Her enterprising energy and willingness to go the extra mile were greatly appreciated."</p>
+        <p class="rec-attr"><strong>Head of PMO</strong> · Managed Service Provider</p>
+      </div>
+      <div class="rec-item">
+        <p class="rec-text">"Christina demonstrated impactful delivery on strategic initiatives with direct C-level involvement. Her strengths include VP/C-suite stakeholder engagement, bringing structure to ambiguity, and driving results through agility and professionalism."</p>
+        <p class="rec-attr"><strong>VP of Operations</strong> · Global Hyperscale Data Centre</p>
+      </div>
+      <div class="rec-item">
+        <p class="rec-text">"Christina was instrumental in ensuring our department delivered on multiple projects. Her ability to allocate completion dates, hold owners accountable, and adapt to various perspectives was invaluable."</p>
+        <p class="rec-attr"><strong>Executive Assistant</strong> · Global Hyperscale Data Centre</p>
+      </div>
+      <div class="rec-item">
+        <p class="rec-text">"Christina is highly proactive and diligent. She delivers results under pressure and tight timelines, making her a reliable asset for any team."</p>
+        <p class="rec-attr"><strong>Senior Project Manager</strong> · Global Retail Franchise</p>
+      </div>
+      <div class="rec-item">
+        <p class="rec-text">"Christina effectively managed stakeholders on a large-scale telecom programme. Her resilience in high-pressure environments and focus on accountability ensured consistent success."</p>
+        <p class="rec-attr"><strong>Senior Consultant</strong> · Global Change Consultancy</p>
+      </div>
+      <div class="rec-item">
+        <p class="rec-text">"Christina was a key contributor to a £200M innovation programme, delivering concise communications to executive teams and enforcing governance across divisions. Her ability to hold stakeholders accountable was crucial to the programme's success."</p>
+        <p class="rec-attr"><strong>Lead Consultant</strong> · Telecommunications</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span class="footer-name">Christina A. · GRC &amp; Information Security Portfolio</span>
+  <a href="https://kompetenta.co.uk" target="_blank" rel="noopener" class="footer-link">Kompetenta ↗</a>
+</footer>
+
+<script>
+  function toggleArtefact(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.artefact-toggle');
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.artefact-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.artefact-toggle').forEach(t => t.classList.remove('open'));
+    if (!isOpen) {
+      body.classList.add('open');
+      toggle.classList.add('open');
+      setTimeout(() => { body.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+    }
+  }
+</script>
+
+</body>
+</html>
